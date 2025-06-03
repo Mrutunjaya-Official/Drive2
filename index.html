@@ -314,6 +314,11 @@
     font-weight: 600;
     text-transform: uppercase;
     transition: background-color 0.3s, color 0.3s;
+    gap: 6px;
+  }
+  nav#site-nav a span.material-symbols-outlined {
+    font-size: 24px;
+    user-select:none;
   }
   nav#site-nav a.active,
   nav#site-nav a:hover,
@@ -365,6 +370,7 @@
     outline-offset: 4px;
   }
 
+  /* Responsive: On mobile hide nav link texts, show icons only */
   @media (max-width: 720px){
     main {
       margin: calc(var(--nav-height)+20px) 12px 140px;
@@ -383,10 +389,16 @@
       gap: 12px;
     }
     nav#site-nav a {
-      font-size: 1rem;
-      padding: 0 10px;
-      height: 36px;
-      line-height: 36px;
+      font-size: 0; /* Hide text */
+      flex-direction: column;
+      align-items: center;
+    }
+    nav#site-nav a span.material-symbols-outlined {
+      font-size: 24px;
+      user-select:none;
+    }
+    nav#site-nav a > span:last-child {
+      display: none; /* Hide text span */
     }
     #bottom-icons button.icon-btn {
       font-size: 24px;
@@ -399,7 +411,6 @@
 <header>
   <div class="logo-container" tabindex="0" role="button" aria-label="Home" title="Home">
     <span class="material-symbols-outlined" aria-hidden="true">aodglyphsarchitecture</span>
-   
   </div>
 </header>
 <main>
@@ -426,11 +437,26 @@
 
 <div id="bottom-nav-container" aria-label="Bottom navigation and actions" >
   <nav id="site-nav" role="navigation" aria-label="Site Navigation">
-    <a href="#" id="nav-home" class="active" role="link" tabindex="0" aria-current="page">Home</a>
-    <a href="#" id="nav-notes" role="link" tabindex="0">Notes</a>
-    <a href="#" id="nav-download" role="link" tabindex="0">Downloaded</a>
-    <a href="#" id="nav-settings" role="link" tabindex="0">Settings</a>
-    <a href="#" id="nav-info" role="link" tabindex="0">Info</a>
+    <a href="#" id="nav-home" class="active" role="link" tabindex="0" aria-current="page">
+      <span class="material-symbols-outlined" aria-hidden="true">home</span>
+      <span>Home</span>
+    </a>
+    <a href="#" id="nav-notes" role="link" tabindex="0">
+      <span class="material-symbols-outlined" aria-hidden="true">note</span>
+      <span>Notes</span>
+    </a>
+    <a href="#" id="nav-download" role="link" tabindex="0">
+      <span class="material-symbols-outlined" aria-hidden="true">download</span>
+      <span>Downloaded</span>
+    </a>
+    <a href="#" id="nav-settings" role="link" tabindex="0">
+      <span class="material-symbols-outlined" aria-hidden="true">settings</span>
+      <span>Settings</span>
+    </a>
+    <a href="#" id="nav-info" role="link" tabindex="0">
+      <span class="material-symbols-outlined" aria-hidden="true">info</span>
+      <span>Info</span>
+    </a>
   </nav>
   <div id="bottom-icons" aria-label="Bottom action icons">
     <button id="theme-toggle" class="icon-btn" aria-label="Toggle light/dark theme" title="Toggle theme" tabindex="0">
@@ -446,7 +472,6 @@
 </div>
 
 <script>
-// JavaScript as provided in the previous step below:
 document.addEventListener("DOMContentLoaded", () => {
   const notesJsonUrl = "notes.json";
   let notesDataCache = null;
@@ -489,9 +514,9 @@ document.addEventListener("DOMContentLoaded", () => {
     contentPage.innerHTML = "";
     const ul = document.createElement("ul");
     ul.className = "section-notes-list";
-    notesDataCache.sections.forEach(section => {
+    notesDataCache.sections.forEach((section, index) => {
       const li = document.createElement("li");
-      li.textContent = section.name;
+      li.textContent = `${index + 1}. ${section.name}`; // Add numbering
       li.style.fontWeight = "800";
       li.style.fontSize = "1.3rem";
       li.style.cursor = "pointer";
@@ -522,11 +547,11 @@ document.addEventListener("DOMContentLoaded", () => {
     sectionEl.appendChild(heading);
     const ul = document.createElement("ul");
     ul.className = "section-notes-list";
-    section.notes.forEach(note => {
+    section.notes.forEach((note, index) => {
       const li = document.createElement("li");
       const a = document.createElement("a");
       a.href = "#";
-      a.textContent = note.title;
+      a.textContent = `${index + 1}. ${note.title}`; // Add numbering
       a.tabIndex = 0;
       a.addEventListener("click", e => {
         e.preventDefault();
@@ -548,20 +573,20 @@ document.addEventListener("DOMContentLoaded", () => {
   function showAllNotes() {
     if(!notesDataCache) return;
     contentPage.innerHTML = "";
-    notesDataCache.sections.forEach(section => {
+    notesDataCache.sections.forEach((section, sectionIndex) => {
       const sectionEl = document.createElement("section");
       sectionEl.className = "note-section";
       const heading = document.createElement("h3");
-      heading.textContent = section.name;
+      heading.textContent = `${sectionIndex + 1}. ${section.name}`; // Add numbering
       sectionEl.appendChild(heading);
       const ul = document.createElement("ul");
       ul.className = "section-notes-list";
 
-      section.notes.forEach(note => {
+      section.notes.forEach((note, noteIndex) => {
         const li = document.createElement("li");
         const a = document.createElement("a");
         a.href = "#";
-        a.textContent = note.title;
+        a.textContent = `${noteIndex + 1}. ${note.title}`; // Add numbering
         a.tabIndex = 0;
         a.addEventListener("click", e => {
           e.preventDefault();
@@ -785,3 +810,4 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
+

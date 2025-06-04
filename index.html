@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -109,7 +109,7 @@
     color: var(--gray-light);
   }
 
-  /* Notes section */
+  /* Notes section styling */
   .note-section {
     margin-bottom: 40px;
   }
@@ -158,117 +158,7 @@
     display: block;
   }
 
-  /* Download page */
-  #download-page {
-    display: none;
-    user-select:none;
-    text-align: center;
-  }
-  #download-page h2 {
-    font-size: 2.1rem;
-    font-weight: 800;
-    color: var(--blue-dark);
-    margin-bottom: 22px;
-    user-select:none;
-  }
-  body.dark-mode #download-page h2 {
-    color: var(--blue);
-  }
-  #download-page p {
-    font-size: 1.1rem;
-    color: var(--gray-dark);
-    margin-bottom: 22px;
-  }
-  body.dark-mode #download-page p {
-    color: var(--gray-light);
-  }
-  #download-progress-info {
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: var(--gray-medium);
-    margin-bottom: 48px;
-    min-height: 1.3em;
-  }
-  body.dark-mode #download-progress-info {
-    color: var(--gray-light);
-  }
-  #download-actions {
-    display: flex;
-    gap: 18px;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  #download-btn, #back-btn {
-    min-width: 200px;
-    max-width: 320px;
-    padding: 16px 24px;
-    font-weight: 700;
-    font-size: 1.3rem;
-    border-radius: 28px;
-    cursor: pointer;
-    border: none;
-    user-select:none;
-    transition: background-color 0.3s, color 0.3s;
-    display: inline-block;
-    text-align: center;
-  }
-  #download-btn {
-    background: var(--blue);
-    color: white;
-  }
-  #download-btn:disabled {
-    background: var(--gray-medium);
-    color: var(--gray-light);
-    cursor: not-allowed;
-  }
-  #download-btn:not(:disabled):hover,
-  #download-btn:not(:disabled):focus {
-    background: var(--blue-dark);
-    outline: none;
-  }
-  #back-btn {
-    background: transparent;
-    border: 2px solid var(--gray-medium);
-    color: var(--gray-medium);
-  }
-  #back-btn:hover,
-  #back-btn:focus {
-    background: var(--gray-medium);
-    color: var(--white);
-    outline: none;
-  }
-
-  /* mac style linear progress bar */
-  #progress-bar-container {
-    position: relative;
-    max-width: 520px;
-    height: 20px;
-    background: #d9d9d9;
-    border-radius: 10px;
-    margin: 0 auto 44px;
-  }
-  #progress-bar {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(270deg, var(--blue), var(--blue-dark));
-    border-radius: 10px 0 0 10px;
-    transition: width 0.4s ease;
-  }
-  #progress-text {
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: var(--gray-dark);
-    user-select:none;
-  }
-  body.dark-mode #progress-text {
-    color: var(--gray-light);
-  }
-
-  /* Bottom nav container with site nav and icons */
+  /* Bottom nav and icons styles, responsive */
   #bottom-nav-container {
     position: fixed;
     bottom: 0; left: 0; right: 0;
@@ -278,8 +168,8 @@
     display: flex;
     align-items: center;
     height: var(--nav-height);
-    padding: 0 16px;
-    gap: 20px;
+    padding: 0 12px;
+    gap: 10px;
     z-index: 1100;
     user-select:none;
   }
@@ -291,22 +181,38 @@
   nav#site-nav {
     background: var(--menu-bg-light);
     border-radius: var(--border-radius);
-    padding: 8px 16px;
+    padding: 8px 12px;
     display: flex;
-    gap: 16px;
-    max-width: 700px;
+    gap: 12px;
+    max-width: 100%;
     height: 48px;
-    flex-shrink: 0;
+    flex-shrink: 1;
+    flex-grow: 1;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--blue) var(--gray-light);
+  }
+  nav#site-nav::-webkit-scrollbar {
+    height: 6px;
+  }
+  nav#site-nav::-webkit-scrollbar-track {
+    background: var(--gray-light);
+    border-radius: 3px;
+  }
+  nav#site-nav::-webkit-scrollbar-thumb {
+    background-color: var(--blue);
+    border-radius: 3px;
   }
   body.dark-mode nav#site-nav {
     background: rgba(40, 61, 102, 0.48);
   }
   nav#site-nav a {
+    white-space: nowrap;
     font-size: 1.1rem;
     height: 40px;
     line-height: 40px;
     color: var(--blue);
-    padding: 0 16px;
+    padding: 0 12px;
     border-radius: var(--border-radius);
     display: flex;
     align-items: center;
@@ -314,11 +220,10 @@
     font-weight: 600;
     text-transform: uppercase;
     transition: background-color 0.3s, color 0.3s;
-    gap: 6px;
+    gap: 4px;
   }
   nav#site-nav a span.material-symbols-outlined {
-    font-size: 24px;
-    user-select:none;
+    font-size: 22px;
   }
   nav#site-nav a.active,
   nav#site-nav a:hover,
@@ -336,14 +241,15 @@
   #bottom-icons {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 12px;
+    flex-shrink: 0;
   }
   #bottom-icons button.icon-btn {
     background: transparent;
     border: none;
     cursor: pointer;
     color: var(--blue);
-    font-size: 28px;
+    font-size: 26px;
     padding: 6px;
     border-radius: 10px;
     transition: background-color 0.3s, color 0.3s;
@@ -377,22 +283,23 @@
     }
     #bottom-nav-container {
       padding: 0 12px;
-      flex-wrap: wrap;
-      gap: 12px;
+      gap: 6px;
       justify-content: space-between;
+      flex-wrap: nowrap;
     }
     nav#site-nav {
-      max-width: 100%;
       padding: 6px 8px;
       height: 40px;
-      margin-bottom: 10px;
+      margin-bottom: 0;
       justify-content: center;
-      gap: 12px;
+      gap: 8px;
+      max-width: calc(100% - 100px);
     }
     nav#site-nav a {
       font-size: 0; /* Hide text */
       flex-direction: column;
       align-items: center;
+      white-space: nowrap;
     }
     nav#site-nav a span.material-symbols-outlined {
       font-size: 24px;
@@ -442,6 +349,7 @@
       align-self: center;
       z-index: 1210;
       position: relative;
+      margin-left: 8px;
     }
     body.dark-mode #icons-toggle-btn {
       color: var(--gray-light);
@@ -451,6 +359,13 @@
       background-color: rgba(0, 122, 255, 0.25);
       color: var(--white);
       outline: none;
+    }
+  }
+
+  /* Hide blur-on icon on PC */
+  @media (min-width: 721px) {
+    #icons-toggle-btn {
+      display: none; /* Hide on larger screens */
     }
   }
 </style>
@@ -483,7 +398,7 @@
   </section>
 </main>
 
-<div id="bottom-nav-container" aria-label="Bottom navigation and actions" >
+<div id="bottom-nav-container" aria-label="Bottom navigation and actions">
   <nav id="site-nav" role="navigation" aria-label="Site Navigation">
     <a href="#" id="nav-home" class="active" role="link" tabindex="0" aria-current="page">
       <span class="material-symbols-outlined" aria-hidden="true">home</span>
@@ -569,7 +484,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ul.className = "section-notes-list";
     notesDataCache.sections.forEach((section, index) => {
       const li = document.createElement("li");
-      li.textContent = `${index + 1}. ${section.name}`; // Add numbering
+      li.textContent = `${index + 1}. ${section.name}`;
       li.style.fontWeight = "800";
       li.style.fontSize = "1.3rem";
       li.style.cursor = "pointer";
@@ -592,7 +507,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function showNotesOfBook(section) {
     contentPage.innerHTML = "";
-    // Create title and notes list
     const sectionEl = document.createElement("section");
     sectionEl.className = "note-section";
     const heading = document.createElement("h3");
@@ -604,7 +518,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const li = document.createElement("li");
       const a = document.createElement("a");
       a.href = "#";
-      a.textContent = `${index + 1}. ${note.title}`; // Add numbering
+      a.textContent = `${index + 1}. ${note.title}`;
       a.tabIndex = 0;
       a.addEventListener("click", e => {
         e.preventDefault();
@@ -630,7 +544,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const sectionEl = document.createElement("section");
       sectionEl.className = "note-section";
       const heading = document.createElement("h3");
-      heading.textContent = `${sectionIndex + 1}. ${section.name}`; // Add numbering
+      heading.textContent = `${sectionIndex + 1}. ${section.name}`;
       sectionEl.appendChild(heading);
       const ul = document.createElement("ul");
       ul.className = "section-notes-list";
@@ -639,7 +553,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const li = document.createElement("li");
         const a = document.createElement("a");
         a.href = "#";
-        a.textContent = `${noteIndex + 1}. ${note.title}`; // Add numbering
+        a.textContent = `${noteIndex + 1}. ${note.title}`;
         a.tabIndex = 0;
         a.addEventListener("click", e => {
           e.preventDefault();
@@ -827,19 +741,35 @@ document.addEventListener("DOMContentLoaded", () => {
     downloadPage.style.display = "none";
   }
 
-  // Theme toggle button
-  themeToggleBtn.addEventListener("click", () => {
-    if(document.body.classList.contains("dark-mode")){
-      document.body.classList.remove("dark-mode");
-      themeToggleBtn.innerHTML = '<span class="material-symbols-outlined" aria-hidden="true">light_mode</span>';
-    } else {
+  // Theme toggle button logic with initial state from localStorage or system
+  function setTheme(dark) {
+    if(dark){
       document.body.classList.add("dark-mode");
       themeToggleBtn.innerHTML = '<span class="material-symbols-outlined" aria-hidden="true">dark_mode</span>';
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.body.classList.remove("dark-mode");
+      themeToggleBtn.innerHTML = '<span class="material-symbols-outlined" aria-hidden="true">light_mode</span>';
+      localStorage.setItem('theme', 'light');
     }
+  }
+
+  themeToggleBtn.addEventListener("click", () => {
+    const isDark = document.body.classList.contains("dark-mode");
+    setTheme(!isDark);
   });
-  themeToggleBtn.innerHTML = document.body.classList.contains("dark-mode") ?
-    '<span class="material-symbols-outlined" aria-hidden="true">dark_mode</span>' :
-    '<span class="material-symbols-outlined" aria-hidden="true">light_mode</span>';
+
+  // On load, set theme based on saved preference or system preference
+  const savedTheme = localStorage.getItem('theme');
+  if(savedTheme === 'dark'){
+    setTheme(true);
+  } else if(savedTheme === 'light'){
+    setTheme(false);
+  } else {
+    // Default to system preference
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    setTheme(prefersDark);
+  }
 
   // Logo click resets to home
   const logoContainer = document.querySelector(".logo-container");
